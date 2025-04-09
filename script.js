@@ -13,6 +13,37 @@ function addToDisplay(element) {
   display.innerText += element;
 }
 
+function addDecimal() {
+  const { num1, operator, num2 } = parseDisplay();
+
+  if (!operator) {
+    if (!num1.includes(".")) {
+      addToDisplay(".");
+    }
+  } else {
+    if (!num2.includes(".")) {
+      addToDisplay(".");
+    }
+  }
+}
+
+function addOperator(operator) {
+  if (operator === "-" && display.innerText === "0") {
+    display.innerText = "-";
+    return;
+  }
+
+  if (curOperation !== null) {
+    if (parseDisplay()["num2"] === "") {
+      deleteDisplay();
+    } else {
+      computeResult();
+    }
+  }
+  curOperation = operator;
+  display.innerText += curOperation;
+}
+
 function clearDisplay() {
   curOperation = null;
   display.innerText = "0";
@@ -75,37 +106,6 @@ function computeResult() {
   }
 }
 
-function addDecimal() {
-  const { num1, operator, num2 } = parseDisplay();
-
-  if (!operator) {
-    if (!num1.includes(".")) {
-      addToDisplay(".");
-    }
-  } else {
-    if (!num2.includes(".")) {
-      addToDisplay(".");
-    }
-  }
-}
-
-function addOperator(operator) {
-  if (operator === "-" && display.innerText === "0") {
-    display.innerText = "-";
-    return;
-  }
-
-  if (curOperation !== null) {
-    if (parseDisplay()["num2"] === "") {
-      deleteDisplay();
-    } else {
-      computeResult();
-    }
-  }
-  curOperation = operator;
-  display.innerText += curOperation;
-}
-
 const numberButtons = document.querySelectorAll(".number-button");
 numberButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
@@ -121,10 +121,10 @@ operatorButtons.forEach((button) => {
   });
 });
 
-equalsButton.addEventListener("click", computeResult);
 decimalButton.addEventListener("click", addDecimal);
 delButton.addEventListener("click", deleteDisplay);
 acButton.addEventListener("click", clearDisplay);
+equalsButton.addEventListener("click", computeResult);
 document.addEventListener("keydown", (event) => {
   const key = event.key;
 
