@@ -11,13 +11,14 @@ body {
 }
 
 .calculator-body {
-    background-color: #494949;
+    background-color: #5d5d5d;
     display: flex;
     flex-direction: column;
     width: 300px;
     padding: 20px;
     margin-top: 100px;
     border-radius: 5px;
+    box-shadow: 10px 10px 8px #1f1f1f;
 }
 
 .display-container {
