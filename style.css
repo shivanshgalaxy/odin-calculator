@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+:root {
+    --flex-gap: 15px;
+}
+
+body {
+    font-family: "JetBrains Mono", monospace;
+    display: flex;
+    justify-content: center;
+}
+
+.calculator-body {
+    background-color: #494949;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    margin-top: 100px;
+    border-radius: 5px;
+}
+
+.display-container {
+    display: flex;
+}
+
+.display {
+    font-size: 24px;
+    padding-top: 12px;
+    padding-left: 16px;
+    background-color: #969696;
+    height: 80px;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: var(--flex-gap);
+}
+
+.numeric-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--flex-gap);
+    flex-grow: 3;
+}
+
+.remove {
+    display: flex;
+    justify-content: center;
+    gap: var(--flex-gap);
+}
+
+.remove > * {
+    flex: auto;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--flex-gap);
+}
+
+.numbers > * {
+    flex: auto;
+}
+
+.number-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--flex-gap);
+}
+
+.operation-buttons {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    gap: var(--flex-gap);
+}
+
+.button, .remove-button {
+    background-color: #cccaca;
+    text-align: center;
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 4px;
+    border: 1px solid black;
+    transition: all 0.1s ease-in-out;
+}
+
+.button:hover, .remove-button:hover {
+    background-color: #a6a4a4;
+}
+
