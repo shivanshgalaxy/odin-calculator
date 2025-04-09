@@ -95,3 +95,18 @@ body {
     background-color: #a6a4a4;
 }
 
+.remove-button {
+    background-color: #949494;
+}
+
+.remove-button:hover {
+    background-color: #6c6c6c;
+}
+
+.operation-button {
+    background-color: #ff6d45;
+}
+
+.operation-button:hover {
+    background-color: #ff9b81;
+}

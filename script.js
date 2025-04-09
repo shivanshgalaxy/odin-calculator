@@ -7,6 +7,9 @@ let curOperation = null;
 const validOperators = new Set(["+", "-", "*", "/", "%"]);
 
 function addToDisplay(element) {
+  if (display.innerText === "Can't divide by 0 :|") {
+    display.innerText = "";
+  }
   if (display.innerText === "0") {
     display.innerText = "";
   }
@@ -79,11 +82,13 @@ function computeResult() {
   const num1 = Number(parsedString["num1"]);
   const operator = parsedString["operator"];
   const num2 = Number(parsedString["num2"]);
-  console.log(num1);
-  console.log(num2);
 
   let result;
   if (!isNaN(num1) && operator !== "" && !isNaN(num2)) {
+    if ((operator === "/" || operator === "%") && num2 === 0) {
+      display.innerText = "Can't divide by 0 :|";
+      return;
+    }
     switch (operator) {
       case "+":
         result = num1 + num2;
