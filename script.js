@@ -21,10 +21,20 @@ numberButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll(".operation-button");
 operatorButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-        if (curOperation !== null) {
-            deleteDisplay();
+        const operator = event.target.innerText;
+        if (operator === "-" && display.innerText === "0") {
+            display.innerText = "-";
+            return;
         }
-        curOperation = event.target.innerText
+
+        if (curOperation !== null) {
+            if (parseDisplay()["num2"] === "") {
+                deleteDisplay();
+            } else {
+                computeResult();
+            }
+        }
+        curOperation = operator
         display.innerText += curOperation;
     })
 })
@@ -52,9 +62,9 @@ function deleteDisplay() {
     }
 }
 
-function parseString() {
+function parseDisplay() {
     const displayText = String(display.innerText);
-    const regex = /(\d*\.?\d*)([+\-*/%]*)(\d*\.?\d*)/;
+    const regex = /(-?\d*\.?\d*)([+\-*\/%]*)(-?\d*\.?\d*)/;
     const match = displayText.match(regex);
     if (match) {
         const num1 = match[1];
@@ -67,10 +77,10 @@ function parseString() {
 }
 
 function computeResult() {
-    const parsedString = parseString();
-    const num1 = parseInt(parsedString["num1"]);
+    const parsedString = parseDisplay();
+    const num1 = Number(parsedString["num1"]);
     const operator = parsedString["operator"];
-    const num2 = parseInt(parsedString["num2"]);
+    const num2 = Number(parsedString["num2"]);
     console.log(num1);
     console.log(num2);
 
@@ -89,6 +99,7 @@ function computeResult() {
                 result = num1 * num2;
                 break;
             case "/":
+
                 result = num1 / num2;
                 break;
             case "%":
@@ -101,6 +112,19 @@ function computeResult() {
 }
 
 equalsButton.addEventListener("click", computeResult);
+decimalButton.addEventListener("click", () => {
+    const {num1, operator, num2} = parseDisplay();
+
+    if(!operator) {
+        if(!num1.includes(".")) {
+            addToDisplay(".");
+        }
+    } else {
+        if(!num2.includes(".")) {
+            addToDisplay(".");
+        }
+    }
+});
 
 delButton.addEventListener("click", deleteDisplay);
 acButton.addEventListener("click", clearDisplay);
